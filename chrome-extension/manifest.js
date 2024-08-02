@@ -35,23 +35,20 @@ const manifest = Object.assign(
       default_popup: 'popup/index.html',
       default_icon: 'icon-34.png',
     },
-    chrome_url_overrides: {
-      newtab: 'newtab/index.html',
-    },
     icons: {
       128: 'icon-128.png',
     },
     content_scripts: [
       {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+        matches: ['http://portal.ubif.net/*', 'https://portal.ubif.net/*'],
         js: ['content/index.iife.js'],
       },
       {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+        matches: ['http://portal.ubif.net/*', 'https://portal.ubif.net/*'],
         js: ['content-ui/index.iife.js'],
       },
       {
-        matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+        matches: ['http://portal.ubif.net/*', 'https://portal.ubif.net/*'],
         css: ['content.css'], // public folder
       },
     ],

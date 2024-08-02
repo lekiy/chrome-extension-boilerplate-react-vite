@@ -1,7 +1,7 @@
 {
-  "name": "chrome-extension-boilerplate-react-vite",
+  "name": "portal-helper",
   "version": "0.0.1",
-  "description": "chrome extension boilerplate",
+  "description": "helper extension for ubreakifix portal",
   "license": "MIT",
   "repository": {
     "type": "git",

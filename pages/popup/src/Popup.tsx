@@ -1,51 +1,87 @@
 import '@src/Popup.css';
-import { useStorageSuspense, withErrorBoundary, withSuspense } from '@chrome-extension-boilerplate/shared';
-import { exampleThemeStorage } from '@chrome-extension-boilerplate/storage';
-
-import { ComponentPropsWithoutRef } from 'react';
+import { withErrorBoundary, withSuspense } from '@chrome-extension-boilerplate/shared';
+import { useCallback, useState } from 'react';
 
 const Popup = () => {
-  const theme = useStorageSuspense(exampleThemeStorage);
+  const [purchaseOrderID, setPurchaseOrderID] = useState<string | null>();
 
-  return (
-    <div
-      className="App"
-      style={{
-        backgroundColor: theme === 'light' ? '#eee' : '#222',
-      }}>
-      <header className="App-header" style={{ color: theme === 'light' ? '#222' : '#eee' }}>
-        <img src={chrome.runtime.getURL('newtab/logo.svg')} className="App-logo" alt="logo" />
+  const getPOID = () => {
+    const target = Array.from(document.getElementsByTagName('h1'));
+    const poID = target[0]?.innerHTML.match(/\d/g)?.join('');
+    if (poID) {
+      setPurchaseOrderID(poID);
+      return true;
+    }
+    console.log('could not find PO ID');
+    return false;
+  };
 
-        <p>
-          Edit <code>pages/popup/src/Popup.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: theme === 'light' ? '#0281dc' : undefined, marginBottom: '10px' }}>
-          Learn React!
-        </a>
-        <ToggleButton>Toggle theme</ToggleButton>
-      </header>
-    </div>
-  );
-};
+  const getPurchaseOrderData = async (id: string) => {
+    const response = await fetch(
+      `https://portal.ubif.net/api/purchase/${id}?get_distro_info=1&get_shipping_methods=1&with=%7B%22purchaseItems.storeItem.item.itemAttributes%22:%22purchaseItems.storeItem.item.itemAttributes%22%7D`,
+      { method: 'get' },
+    );
+    return await response.json();
+  };
 
-const ToggleButton = (props: ComponentPropsWithoutRef<'button'>) => {
-  const theme = useStorageSuspense(exampleThemeStorage);
-  return (
-    <button
-      className={
-        props.className +
-        ' ' +
-        'font-bold mt-4 py-1 px-4 rounded shadow hover:scale-105 ' +
-        (theme === 'light' ? 'bg-white text-black' : 'bg-black text-white')
+  function getCookie(name: string) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      cookies.forEach(cookie => {
+        if (cookie.substring(0, name.length + 1) === name + '=') {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        }
+      });
+    }
+    console.log(cookieValue);
+    return cookieValue;
+  }
+
+  const getfilteredDistroPartIds = useCallback(async () => {
+    if (!purchaseOrderID) {
+      console.log('purchaseOrderID not found');
+      return null;
+    }
+    const data = await getPurchaseOrderData(purchaseOrderID);
+    const distroItems = data.data.purchase_items.filter(value => {
+      return value.store_item.item.distro_product_id;
+    });
+    const distroItemIds = distroItems.map(item => {
+      return item.id;
+    });
+    return distroItemIds;
+  }, [purchaseOrderID]);
+
+  const handleRemoveDistroClick = useCallback(
+    async event => {
+      const distroPartIds = await getfilteredDistroPartIds();
+      console.log(distroPartIds);
+
+      const cookie = getCookie(' XSRF-TOKEN');
+
+      if (distroPartIds && cookie) {
+        distroPartIds.forEach(item => {
+          fetch(`https://portal.ubif.net/api/purchaseitem/${item}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+              'X-Xsrf-Token': cookie,
+            },
+          });
+        });
+        location.reload();
+      } else {
+        console.log('No distro Parts found');
       }
-      onClick={exampleThemeStorage.toggle}>
-      {props.children}
-    </button>
+    },
+    [getfilteredDistroPartIds],
+  );
+
+  return (
+    <div>
+      <button onClick={() => console.log(localStorage['XSRF-TOKEN'])}>Remove Non-Distro Parts</button>
+    </div>
   );
 };
 
