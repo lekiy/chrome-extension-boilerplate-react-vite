@@ -1,6 +1,6 @@
 {
-  "name": "@chrome-extension-boilerplate/storage",
-  "version": "0.0.1",
+  "name": "@extension/storage",
+  "version": "0.2.2",
   "description": "chrome extension storage",
   "private": true,
   "sideEffects": false,
@@ -8,20 +8,17 @@
     "dist/**"
   ],
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "index.ts",
   "scripts": {
-    "clean": "rimraf ./dist && rimraf .turbo",
-    "build": "tsup index.ts --format esm,cjs --dts",
-    "dev": "tsc -w",
+    "clean": "rimraf ./dist",
+    "ready": "node build.mjs",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {},
   "devDependencies": {
-    "@chrome-extension-boilerplate/tsconfig": "workspace:*",
-    "tsup": "8.0.2"
+    "@extension/tsconfig": "workspace:*"
   }
 }

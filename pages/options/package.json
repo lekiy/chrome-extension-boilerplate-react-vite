@@ -1,6 +1,6 @@
 {
-  "name": "@chrome-extension-boilerplate/options",
-  "version": "0.0.1",
+  "name": "@extension/options",
+  "version": "0.2.2",
   "description": "chrome extension options",
   "private": true,
   "sideEffects": true,
@@ -8,22 +8,23 @@
     "dist/**"
   ],
   "scripts": {
-    "clean": "rimraf ./dist && rimraf .turbo",
-    "build": "pnpm run clean && tsc --noEmit && vite build",
-    "build:watch": "cross-env __DEV__=true vite build -w --mode development",
+    "clean": "rimraf ./dist",
+    "build": "pnpm run clean&& pnpm type-check && vite build",
+    "build:watch": "cross-env __DEV__=true vite build --mode development",
     "dev": "pnpm build:watch",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@chrome-extension-boilerplate/shared": "workspace:*",
-    "@chrome-extension-boilerplate/storage": "workspace:*"
+    "@extension/shared": "workspace:*",
+    "@extension/storage": "workspace:*",
+    "@extension/ui": "workspace:*"
   },
   "devDependencies": {
-    "@chrome-extension-boilerplate/tailwindcss-config": "workspace:*",
-    "@chrome-extension-boilerplate/tsconfig": "workspace:*",
-    "@chrome-extension-boilerplate/hmr": "workspace:*"
+    "@extension/tailwindcss-config": "workspace:*",
+    "@extension/tsconfig": "workspace:*",
+    "@extension/vite-config": "workspace:*"
   }
 }

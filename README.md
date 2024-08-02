@@ -1,10 +1,11 @@
 <div align="center">
-<img src="chrome-extension/public/icon-128.png" alt="logo"/>
-<h1> Chrome Extension Boilerplate with<br/>React + Vite + TypeScript</h1>
+
+![](https://github.com/user-attachments/assets/99cb6303-64e4-4bed-bf3f-35735353e6de)
 
 ![](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![](https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![](https://badges.aleen42.com/src/vitejs.svg)
+
 ![GitHub action badge](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/actions/workflows/build-zip.yml/badge.svg)
 <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Jonghakseo/chrome-extension-boilerplate-react-viteFactions&count_bg=%23#222222&title_bg=%23#454545&title=😀&edge_flat=true" alt="hits"/>
 
@@ -13,13 +14,13 @@
 
 </div>
 
-> [!TIP]
+> [!NOTE]
 > This project is listed in the [Awesome Vite](https://github.com/vitejs/awesome-vite)
 
-> [!IMPORTANT]
-> Share storage state between every page
+> [!TIP]
+> Share storage state between all pages
 >
-> https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/assets/53500778/1992e46c-032a-4743-bbd2-c421757517d7
+> https://github.com/user-attachments/assets/3b8e189f-6443-490e-a455-4f9570267f8c
 
 ## Table of Contents
 
@@ -68,9 +69,9 @@ This boilerplate is made for creating chrome extensions using React and Typescri
 ### For Chrome: <a name="chrome"></a>
 
 1. Run:
-    - Dev: `pnpm dev` (it's run parallel with `pnpm dev-server` automatically)
-        - When you run with Windows, you should run as
-          administrator. [(Issue#456)](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/456)
+    - Dev: `pnpm dev`
+      - When you run with Windows, you should run as
+        administrator. [(Issue#456)](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/456)
     - Prod: `pnpm build`
 2. Open in browser - `chrome://extensions`
 3. Check - `Developer mode`
@@ -80,7 +81,7 @@ This boilerplate is made for creating chrome extensions using React and Typescri
 ### For Firefox: <a name="firefox"></a>
 
 1. Run:
-    - Dev: `pnpm dev:firefox` (it's run parallel with `pnpm dev-server` automatically)
+    - Dev: `pnpm dev:firefox`
     - Prod: `pnpm build:firefox`
 2. Open in browser - `about:debugging#/runtime/this-firefox`
 3. Find and Click - `Load Temporary Add-on...`
@@ -139,7 +140,13 @@ Some shared packages
 
 ## Star History <a name="starhistory"></a>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Jonghakseo/chrome-extension-boilerplate-react-vite&type=Date)](https://star-history.com/#Jonghakseo/chrome-extension-boilerplate-react-vite&Date)
+<a href="https://star-history.com/#Jonghakseo/chrome-extension-boilerplate-react-vite&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Jonghakseo/chrome-extension-boilerplate-react-vite&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Jonghakseo/chrome-extension-boilerplate-react-vite&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Jonghakseo/chrome-extension-boilerplate-react-vite&type=Date" />
+ </picture>
+</a>
 
 ## Contributors <a name="contributors"></a>
 
@@ -158,4 +165,4 @@ This Boilerplate is made possible thanks to all of its contributors.
 
 ---
 
-Made by [Jonghakseo](https://nookpi.tistory.com/)
+Made by [Jonghakseo](https://jonghakseo.github.io/)

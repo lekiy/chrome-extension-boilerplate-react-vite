@@ -1,14 +1,44 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "ui": "tui",
+  "tasks": {
+    "ready": {
+      "outputs": [
+        "dist/**",
+        "build/**"
+      ]
+    },
     "dev": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**"],
+      "dependsOn": [
+        "ready"
+      ],
+      "outputs": [
+        "dist/**",
+        "build/**"
+      ],
+      "env": [
+        "__FIREFOX__"
+      ],
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["../../dist/**", "dist/**", "build/**"],
+      "dependsOn": [
+        "^build",
+        "ready"
+      ],
+      "env": [
+        "__FIREFOX__"
+      ],
+      "outputs": [
+        "../../dist/**",
+        "dist/**",
+        "build/**"
+      ]
+    },
+    "zip": {
+      "dependsOn": [
+        "^build"
+      ],
       "cache": false
     },
     "type-check": {
@@ -25,7 +55,8 @@
     },
     "test": {
       "dependsOn": [
-        "^test", "^build"
+        "^test",
+        "^build"
       ],
       "cache": false
     },

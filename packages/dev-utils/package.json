@@ -1,6 +1,6 @@
 {
-  "name": "@chrome-extension-boilerplate/dev-utils",
-  "version": "0.0.1",
+  "name": "@extension/dev-utils",
+  "version": "0.2.2",
   "description": "chrome extension dev utils",
   "private": true,
   "sideEffects": false,
@@ -9,17 +9,17 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "index.ts",
   "scripts": {
-    "clean": "rimraf ./dist && rimraf ./build && rimraf .turbo",
-    "build": "pnpm run clean && tsc",
+    "clean": "rimraf ./dist && rimraf ./build",
+    "ready": "tsc",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {},
   "devDependencies": {
-    "@chrome-extension-boilerplate/tsconfig": "workspace:*"
+    "@extension/tsconfig": "workspace:*"
   }
 }

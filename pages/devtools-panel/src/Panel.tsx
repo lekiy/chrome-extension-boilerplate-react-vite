@@ -1,30 +1,20 @@
 import '@src/Panel.css';
-import { useStorageSuspense, withErrorBoundary, withSuspense } from '@chrome-extension-boilerplate/shared';
-import { exampleThemeStorage } from '@chrome-extension-boilerplate/storage';
+import { useStorageSuspense, withErrorBoundary, withSuspense } from '@extension/shared';
+import { exampleThemeStorage } from '@extension/storage';
 import { ComponentPropsWithoutRef } from 'react';
 
 const Panel = () => {
   const theme = useStorageSuspense(exampleThemeStorage);
+  const isLight = theme === 'light';
+  const logo = isLight ? 'devtools-panel/logo_horizontal.svg' : 'devtools-panel/logo_horizontal_dark.svg';
 
   return (
-    <div
-      className="App"
-      style={{
-        backgroundColor: theme === 'light' ? '#eee' : '#222',
-      }}>
-      <header className="App-header" style={{ color: theme === 'light' ? '#222' : '#eee' }}>
-        <img src={chrome.runtime.getURL('devtools-panel/logo.svg')} className="App-logo" alt="logo" />
+    <div className={`App ${isLight ? 'bg-slate-50' : 'bg-gray-800'}`}>
+      <header className={`App-header ${isLight ? 'text-gray-900' : 'text-gray-100'}`}>
+        <img src={chrome.runtime.getURL(logo)} className="App-logo" alt="logo" />
         <p>
-          Edit <code>pages/devtools-panel/src/Panel.tsx</code> and save to reload.
+          Edit <code>pages/devtools-panel/src/Panel.tsx</code>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: theme === 'light' ? '#0281dc' : undefined, marginBottom: '10px' }}>
-          Learn React!
-        </a>
         <ToggleButton>Toggle theme</ToggleButton>
       </header>
     </div>

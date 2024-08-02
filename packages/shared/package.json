@@ -1,28 +1,25 @@
 {
-  "name": "@chrome-extension-boilerplate/shared",
-  "version": "0.0.1",
+  "name": "@extension/shared",
+  "version": "0.2.2",
   "description": "chrome extension shared code",
   "private": true,
   "sideEffects": false,
   "files": [
     "dist/**"
   ],
+  "types": "index.ts",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf ./dist && rimraf .turbo",
-    "build": "tsup index.ts --format esm,cjs --dts --external react,chrome",
-    "dev": "tsc -w",
+    "clean": "rimraf ./dist",
+    "ready": "node build.mjs",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier . --write",
+    "prettier": "prettier . --write --ignore-path ../../.prettierignore",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {},
   "devDependencies": {
-    "@chrome-extension-boilerplate/storage": "workspace:*",
-    "@chrome-extension-boilerplate/tsconfig": "workspace:*",
-    "tsup": "8.0.2"
+    "@extension/storage": "workspace:*",
+    "@extension/tsconfig": "workspace:*"
   }
 }
